@@ -9,7 +9,7 @@ plugins {
 
     id("org.openapi.generator") version "6.2.0"
     id("org.jlleitschuh.gradle.ktlint") version "11.0.0"
-    id("com.github.ben-manes.versions") version "0.42.0"
+    id("com.github.ben-manes.versions") version "0.43.0"
 }
 
 repositories {
