@@ -139,3 +139,13 @@ tasks.compileKotlin.configure {
         tasks.getByName("generateConduitApi"),
     )
 }
+
+tasks.register("installKtlintGitPreCommitHook", Copy::class) {
+    from("${rootProject.rootDir}/script/git-hook")
+    into("${rootProject.rootDir}/.git/hooks")
+    doLast {
+        exec {
+            commandLine("chmod", "+x", "${rootProject.rootDir}/.git/hooks/pre-commit")
+        }
+    }
+}
