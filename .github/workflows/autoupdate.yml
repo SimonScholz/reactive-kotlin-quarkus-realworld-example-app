@@ -1,4 +1,5 @@
-name: autoupdate
+---
+name: auto update
 on:
   # This will trigger on all pushes to all branches.
   push: {}
@@ -9,10 +10,10 @@ on:
   #     - unstable
 jobs:
   autoupdate:
-    name: autoupdate
+    name: auto update
     runs-on: ubuntu-20.04
     steps:
       - uses: docker://chinthakagodawita/autoupdate-action:v1
         env:
           GITHUB_TOKEN: '${{ secrets.GITHUB_TOKEN }}'
-          EXCLUDED_LABELS: "dependencies" // ignore dependabot PRs
+          EXCLUDED_LABELS: "dependencies" # ignore dependabot PRs
