@@ -1,0 +1,77 @@
+---
+version: "3.7"
+
+services:
+  mongodb:
+    image: mongo:5.0.12
+    container_name: quarkus-real-world-mongo
+    restart: "no"
+    environment:
+      - MONGO_INIT_DATABASE= quarkus-real-world
+      - MONGO_INITDB_ROOT_USERNAME= quarkus
+      - MONGO_INITDB_ROOT_PASSWORD= secret
+      - GET_HOSTS_FROM=dns
+    ports:
+      - '27018:27017'
+    volumes:
+      - mongodb_data_container:/data/db
+    labels:
+      kompose.service.type: LoadBalancer
+  prometheus:
+    image: bitnami/prometheus:2.38.0
+    container_name: quarkus-real-world-prometheus
+    restart: "no"
+    environment:
+      - GET_HOSTS_FROM=dns
+    ports:
+      - '9090:9090'
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    volumes:
+      - ./dev-environment/docker-config/prometheus:/etc/prometheus
+      - prometheus-data:/prometheus
+    command:
+      # Enable to refresh the configuration using the reload endpoint http://localhost:9090/-/reload
+      - '--web.enable-lifecycle'
+      # We need to pass all the other command flags as well
+      # See: https://github.com/prometheus/prometheus/blob/b4317768b9476ee09a770c5dac6d826a8e7000f2/Dockerfile#L23-L26
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--web.console.libraries=/usr/share/prometheus/console_libraries --web.console.templates=/usr/share/prometheus/consoles'
+    labels:
+      kompose.service.type: LoadBalancer
+  grafana:
+    image: grafana/grafana:9.0.9
+    container_name: quarkus-real-world-grafana
+    restart: "no"
+    environment:
+      - GET_HOSTS_FROM=dns
+    ports:
+      - '3000:3000'
+    volumes:
+      - ./dev-environment/docker-config/grafana:/etc/grafana/provisioning/datasources
+      - grafana-data:/var/lib/grafana
+    labels:
+      kompose.service.type: LoadBalancer
+  keycloak:
+    image: 'quay.io/keycloak/keycloak:19.0.2'
+    container_name: quarkus-real-world-keycloak
+    restart: "no"
+    ports:
+      - '8081:8080' # Changing this port because 8080 is usually the default for the quarkus app
+    environment:
+      - KEYCLOAK_ADMIN=admin
+      - KEYCLOAK_ADMIN_PASSWORD=admin
+      - KEYCLOAK_IMPORT=./dev-environment/docker-config/keycloak/simon-realm.json
+      - GET_HOSTS_FROM=dns
+    command:
+      - start-dev
+      - --import-realm
+    labels:
+      kompose.service.type: LoadBalancer
+
+
+volumes:
+  prometheus-data:
+  grafana-data:
+  mongodb_data_container:
