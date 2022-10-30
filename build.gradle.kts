@@ -21,7 +21,11 @@ val quarkusPlatformGroupId: String by project
 val quarkusPlatformArtifactId: String by project
 val quarkusPlatformVersion: String by project
 
+val fabrikt: Configuration by configurations.creating
+
 dependencies {
+    fabrikt("com.cjbooms:fabrikt:7.2.1")
+
     implementation(enforcedPlatform("$quarkusPlatformGroupId:$quarkusPlatformArtifactId:$quarkusPlatformVersion"))
     implementation("io.quarkus:quarkus-resteasy-reactive-jackson")
     implementation("io.quarkus:quarkus-keycloak-authorization")
@@ -35,6 +39,7 @@ dependencies {
     implementation("io.quarkus:quarkus-micrometer")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     implementation("io.quarkus:quarkus-arc")
+    implementation("io.quarkus:quarkus-hibernate-validator")
 
     testImplementation("io.quarkus:quarkus-junit5")
     testImplementation("io.rest-assured:rest-assured")
@@ -119,12 +124,37 @@ fun generateOpenApiSpec(
     )
 }
 
-generateOpenApiSpec(
+generateOpenApiSpecByFabrikt(
     taskName = "generateConduitApi",
     spec = "$rootDir/api/server/conduit-api-v1.yml",
     pkg = "io.github.simonscholz.conduit.dto.v1",
-    versionSuffix = "V1",
 )
+
+fun generateOpenApiSpecByFabrikt(
+    taskName: String,
+    spec: String,
+    pkg: String,
+) = tasks.register<JavaExec>(taskName) {
+    group = "Source Generation by Fabrikt"
+    description = "Generates kotlin classes from an Open API specification"
+
+    val generationDir = "$buildDir/generated"
+
+    inputs.files(spec)
+    outputs.dir(generationDir)
+    outputs.cacheIf { true }
+    classpath(fabrikt)
+    mainClass.set("com.cjbooms.fabrikt.cli.CodeGen")
+    args = listOf(
+        "--output-directory", generationDir,
+        "--base-package", pkg,
+        "--api-file", spec,
+        "--targets", "http_models",
+        "--targets", "QUARKUS_REFLECTION_CONFIG",
+        "--http-model-opts", "QUARKUS_REFLECTION",
+        "--http-controller-opts", "SUSPEND_MODIFIER",
+    )
+}
 
 sourceSets {
     main {
@@ -132,6 +162,12 @@ sourceSets {
             srcDir("$buildDir/generated/src/main/kotlin")
         }
     }
+}
+
+tasks.runKtlintCheckOverMainSourceSet.configure {
+    dependsOn(
+        tasks.getByName("generateConduitApi"),
+    )
 }
 
 tasks.compileKotlin.configure {
