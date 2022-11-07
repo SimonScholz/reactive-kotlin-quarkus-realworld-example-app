@@ -7,7 +7,7 @@ plugins {
     kotlin("plugin.allopen") version "1.7.20"
     id("io.quarkus")
 
-    id("org.openapi.generator") version "6.2.0"
+    id("org.openapi.generator") version "6.2.1"
     id("org.jlleitschuh.gradle.ktlint") version "11.0.0"
     id("com.github.ben-manes.versions") version "0.43.0"
 }
