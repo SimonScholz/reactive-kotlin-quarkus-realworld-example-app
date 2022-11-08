@@ -1,0 +1,6 @@
+quarkus:
+  keycloak:
+    admin-client:
+      server-url: http://localhost:8081
+    devservices:
+      port: 8081

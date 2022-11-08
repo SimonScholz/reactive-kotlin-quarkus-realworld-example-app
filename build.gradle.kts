@@ -5,6 +5,8 @@ import org.openapitools.generator.gradle.plugin.tasks.GenerateTask
 plugins {
     kotlin("jvm") version "1.7.20"
     kotlin("plugin.allopen") version "1.7.20"
+    kotlin("kapt") version "1.7.20"
+
     id("io.quarkus")
 
     id("org.openapi.generator") version "6.2.1"
@@ -29,17 +31,22 @@ dependencies {
     implementation(enforcedPlatform("$quarkusPlatformGroupId:$quarkusPlatformArtifactId:$quarkusPlatformVersion"))
     implementation("io.quarkus:quarkus-resteasy-reactive-jackson")
     implementation("io.quarkus:quarkus-keycloak-authorization")
+    implementation("io.quarkus:quarkus-keycloak-admin-client-reactive")
     implementation("io.quarkus:quarkus-micrometer-registry-prometheus")
     implementation("io.quarkus:quarkus-resteasy-reactive")
     implementation("io.quarkus:quarkus-kotlin")
     implementation("io.quarkus:quarkus-jacoco")
     implementation("io.quarkus:quarkus-config-yaml")
     implementation("io.quarkus:quarkus-mongodb-panache-kotlin")
-    implementation("io.quarkus:quarkus-resteasy-reactive-kotlin-serialization")
     implementation("io.quarkus:quarkus-micrometer")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     implementation("io.quarkus:quarkus-arc")
     implementation("io.quarkus:quarkus-hibernate-validator")
+
+    implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.14.0")
+
+    implementation("org.mapstruct:mapstruct:1.5.3.Final")
+    kapt("org.mapstruct:mapstruct-processor:1.5.3.Final")
 
     testImplementation("io.quarkus:quarkus-junit5")
     testImplementation("io.rest-assured:rest-assured")

@@ -670,6 +670,7 @@ components:
         - image
         - password
         - username
+        - token
       type: object
       properties:
         email:
@@ -681,6 +682,8 @@ components:
         bio:
           type: string
         image:
+          type: string
+        token:
           type: string
     UserResponse:
       required:
