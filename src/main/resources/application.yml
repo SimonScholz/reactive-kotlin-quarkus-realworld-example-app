@@ -1,0 +1,4 @@
+quarkus:
+  keycloak:
+    policy-enforcer:
+      enable: true

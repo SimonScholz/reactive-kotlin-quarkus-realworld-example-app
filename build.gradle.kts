@@ -3,9 +3,9 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import org.openapitools.generator.gradle.plugin.tasks.GenerateTask
 
 plugins {
-    kotlin("jvm") version "1.7.20"
-    kotlin("plugin.allopen") version "1.7.20"
-    kotlin("kapt") version "1.7.20"
+    kotlin("jvm")
+    kotlin("plugin.allopen")
+    kotlin("kapt")
 
     id("io.quarkus")
 
@@ -30,10 +30,10 @@ dependencies {
 
     implementation(enforcedPlatform("$quarkusPlatformGroupId:$quarkusPlatformArtifactId:$quarkusPlatformVersion"))
     implementation("io.quarkus:quarkus-resteasy-reactive-jackson")
+    implementation("io.quarkus:quarkus-rest-client-reactive")
     implementation("io.quarkus:quarkus-keycloak-authorization")
     implementation("io.quarkus:quarkus-keycloak-admin-client-reactive")
     implementation("io.quarkus:quarkus-micrometer-registry-prometheus")
-    implementation("io.quarkus:quarkus-resteasy-reactive")
     implementation("io.quarkus:quarkus-kotlin")
     implementation("io.quarkus:quarkus-jacoco")
     implementation("io.quarkus:quarkus-config-yaml")
