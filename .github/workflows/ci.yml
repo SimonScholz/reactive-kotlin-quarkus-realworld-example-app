@@ -28,4 +28,10 @@ jobs:
       - name: Build
         run: >
           ./gradlew build
-
+      - name: Upload Test Reports
+        uses: actions/upload-artifact@v3
+        if: success() || failure() # run this step even if previous step failed
+        with:
+          name: JUnit-Test-Results
+          path: |
+            ./build/test-results/test/*.xml
