@@ -14,4 +14,4 @@ jobs:
           name: JUnit Tests               # Name of the check run which will be created
           path: '*.xml'                   # Path to test results (inside artifact .zip)
           reporter: java-junit
-          list-tests: 'failed'
+          list-tests: 'all'
