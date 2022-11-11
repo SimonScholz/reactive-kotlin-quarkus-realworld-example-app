@@ -5,7 +5,6 @@ import io.github.simonscholz.conduit.dto.v1.models.User as UserDTO
 import io.github.simonscholz.core.domain.User
 import org.mapstruct.Mapper
 import org.mapstruct.Mapping
-import org.mapstruct.factory.Mappers
 
 @Mapper
 interface UserMapper {
@@ -16,5 +15,3 @@ interface UserMapper {
     @Mapping(source = "username", target = "name")
     fun toDomain(user: NewUserDTO): User
 }
-
-object UserMapperImpl : UserMapper by Mappers.getMapper(UserMapper::class.java)
