@@ -183,12 +183,12 @@ tasks.compileKotlin.configure {
     )
 }
 
-tasks.register("installKtlintGitPreCommitHook", Copy::class) {
-    from("${rootProject.rootDir}/script/git-hook")
+tasks.register("installKtlintGitPrePushHook", Copy::class) {
+    from("${rootProject.rootDir}/dev-environment/script/git-hook/pre-push")
     into("${rootProject.rootDir}/.git/hooks")
     doLast {
         exec {
-            commandLine("chmod", "+x", "${rootProject.rootDir}/.git/hooks/pre-commit")
+            commandLine("chmod", "+x", "${rootProject.rootDir}/.git/hooks/pre-push")
         }
     }
 }

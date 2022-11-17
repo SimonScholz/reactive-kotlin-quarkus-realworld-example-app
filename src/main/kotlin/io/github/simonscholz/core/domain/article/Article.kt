@@ -1,7 +1,8 @@
 package io.github.simonscholz.core.domain.article
 
-import io.github.simonscholz.core.domain.Tag
 import java.time.Instant
+
+typealias Tag = String
 
 data class Article(
     val slug: String,

@@ -3,7 +3,6 @@ package io.github.simonscholz.infrastructure.adapter.`in`.user
 import io.github.simonscholz.conduit.dto.v1.models.NewUser as NewUserDTO
 import io.github.simonscholz.conduit.dto.v1.models.User as UserDTO
 import io.github.simonscholz.core.domain.User
-import io.github.simonscholz.infrastructure.adapter.out.user.IUserEntityMapper
 import org.mapstruct.Mapper
 import org.mapstruct.Mapping
 import org.mapstruct.factory.Mappers
@@ -22,4 +21,3 @@ interface IUserMapper {
 }
 
 object UserMapper : IUserMapper by Mappers.getMapper(IUserMapper::class.java)
-
