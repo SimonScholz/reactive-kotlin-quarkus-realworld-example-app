@@ -11,7 +11,7 @@ plugins {
 
     id("org.openapi.generator") version "6.2.1"
     id("org.jlleitschuh.gradle.ktlint") version "11.0.0"
-    id("com.github.ben-manes.versions") version "0.43.0"
+    id("com.github.ben-manes.versions") version "0.44.0"
 }
 
 repositories {
@@ -26,7 +26,7 @@ val quarkusPlatformVersion: String by project
 val fabrikt: Configuration by configurations.creating
 
 dependencies {
-    fabrikt("com.cjbooms:fabrikt:7.2.1")
+    fabrikt("com.cjbooms:fabrikt:7.3.0")
 
     implementation(enforcedPlatform("$quarkusPlatformGroupId:$quarkusPlatformArtifactId:$quarkusPlatformVersion"))
     implementation("io.quarkus:quarkus-resteasy-reactive-jackson")
