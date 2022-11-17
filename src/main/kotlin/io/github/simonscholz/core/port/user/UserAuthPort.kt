@@ -1,4 +1,4 @@
-package io.github.simonscholz.core.port
+package io.github.simonscholz.core.port.user
 
 import io.github.simonscholz.core.domain.User
 

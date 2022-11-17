@@ -1,7 +1,7 @@
 package io.github.simonscholz.infrastructure.adapter.out.user
 
 import io.github.simonscholz.core.domain.User
-import io.github.simonscholz.core.port.UserAuthPort
+import io.github.simonscholz.core.port.user.UserAuthPort
 import javax.enterprise.context.ApplicationScoped
 import org.keycloak.admin.client.Keycloak
 import org.keycloak.representations.idm.CredentialRepresentation
