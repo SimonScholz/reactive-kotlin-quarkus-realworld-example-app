@@ -1,8 +1,8 @@
 package io.github.simonscholz.core.application.user
 
 import io.github.simonscholz.core.domain.User
-import io.github.simonscholz.core.port.UserAuthPort
-import io.github.simonscholz.core.port.UserPersistencePort
+import io.github.simonscholz.core.port.user.UserAuthPort
+import io.github.simonscholz.core.port.user.UserPersistencePort
 import io.smallrye.mutiny.Uni
 import javax.enterprise.context.ApplicationScoped
 
