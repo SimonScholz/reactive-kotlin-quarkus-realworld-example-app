@@ -26,7 +26,7 @@ val quarkusPlatformVersion: String by project
 val fabrikt: Configuration by configurations.creating
 
 dependencies {
-    fabrikt("com.cjbooms:fabrikt:7.3.0")
+    fabrikt("com.cjbooms:fabrikt:7.4.0")
 
     implementation(enforcedPlatform("$quarkusPlatformGroupId:$quarkusPlatformArtifactId:$quarkusPlatformVersion"))
     implementation("io.quarkus:quarkus-resteasy-reactive-jackson")
