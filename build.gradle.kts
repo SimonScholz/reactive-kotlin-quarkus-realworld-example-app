@@ -11,7 +11,7 @@ plugins {
 
     id("org.openapi.generator") version "6.2.1"
     id("org.jlleitschuh.gradle.ktlint") version "11.2.0"
-    id("com.github.ben-manes.versions") version "0.44.0"
+    id("com.github.ben-manes.versions") version "0.46.0"
 }
 
 repositories {
