@@ -50,7 +50,7 @@ dependencies {
 
     testImplementation("io.quarkus:quarkus-junit5")
     testImplementation("io.rest-assured:rest-assured")
-    testImplementation("io.quarkiverse.mockk:quarkus-junit5-mockk:1.1.1")
+    testImplementation("io.quarkiverse.mockk:quarkus-junit5-mockk:2.0.0")
     testImplementation("org.assertj:assertj-core:3.23.1")
 }
 
