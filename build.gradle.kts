@@ -10,7 +10,7 @@ plugins {
     id("io.quarkus")
 
     id("org.openapi.generator") version "6.4.0"
-    id("org.jlleitschuh.gradle.ktlint") version "11.2.0"
+    id("org.jlleitschuh.gradle.ktlint") version "11.3.2"
     id("com.github.ben-manes.versions") version "0.46.0"
 }
 
